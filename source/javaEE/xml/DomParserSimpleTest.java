@@ -20,24 +20,29 @@ public class DomParserSimpleTest {
         Document document = documentBuilder.parse(new File("temp/file.xml"));
         Element root = document.getDocumentElement();
         //showElementInfo(root);
-        String string = "";
-        showXML(root);
+        String string = showXML(root);
+        System.out.println(string);
 
 
     }
 
-    public static void showXML(Element root) {
-
+    public static String showXML(Element root) {
+        String res = "";
         NamedNodeMap attributes;
         if(root.hasAttributes()){
-            System.out.print("<" + root.getTagName());
+            res += ("<" + root.getTagName());
+            //System.out.print("<" + root.getTagName());
             attributes = root.getAttributes();
             for (int i = 0; i < attributes.getLength(); i++) {
-                System.out.print(" " + attributes.item(i).getNodeName() + "=" + "\"" + attributes.item(i).getNodeValue() + "\"");
+                //System.out.print(" " + attributes.item(i).getNodeName() + "=" + "\"" + attributes.item(i).getNodeValue() + "\"");
+                res += " " + attributes.item(i).getNodeName() + "=" + "\"" + attributes.item(i).getNodeValue() + "\"";
             }
-            System.out.print(">");
-        }else
-        System.out.printf("<%s>", root.getTagName());
+            res += ">";
+            //System.out.print(">");
+        }else {
+            res += "<" + root.getTagName() + ">";
+            //System.out.printf("<%s>", root.getTagName());
+        }
 
         NodeList children = root.getChildNodes();
 
@@ -46,13 +51,17 @@ public class DomParserSimpleTest {
             if (node.getNodeType() == Node.TEXT_NODE) {
                 Text text = (Text) node;
                 String content = text.getNodeValue();
-                System.out.print(content);
+                //System.out.print(content);
+                res += content;
+                //return res;
             }else {
                 Element element = (Element) node;
-                showXML(element);
+                res += showXML(element);
             }
         }
-        System.out.printf("</%s>", root.getTagName());
+        res += "</" + root.getTagName() + ">";
+        //System.out.printf("</%s>", root.getTagName());
+        return res;
     }
 
 
