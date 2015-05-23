@@ -18,15 +18,15 @@ import java.lang.reflect.Field;
  */
 public class ObjectXMLSerialization {
 
-    public static final String PATHNAME = "E:\\Programming\\courses\\source\\temp\\file.xml";
+    public static final String PATHNAME = "temp/fileclass javaEE.serializationWithXML.SMS.xml";
     public Object object;
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, IllegalAccessException, NoSuchFieldException, InstantiationException {
         File file = new File(PATHNAME);
-        User user = (User) loadFromXML(file);
-        System.out.println(user.toString());
-
-        saveToXML(user);
+        SMS sms = (SMS) loadFromXML(file);
+        System.out.println(sms.toString());
+        SMS message = new SMS("hello");
+        saveToXML(message);
 
 
     }
@@ -58,99 +58,101 @@ public class ObjectXMLSerialization {
                 for (Field f : fields) {
                     f.setAccessible(true);
                     String res = null;
-                    switch (f.getType().toString()) {
-                        case "int":
-                            res = ("<" + f.getName() + ">");
-                            System.out.println("int" + res + f.get(object).toString());
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "float":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "char":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n\r");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "double":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "boolean":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "byte":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "long":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        case "class java.lang.String":
-                            res = ("<" + f.getName() + ">");
-                            writer.write(res);
-                            writer.flush();
-                            writer.write(f.get(object).toString());
-                            writer.flush();
-                            res = ("</" + f.getName() + ">\n");
-                            writer.write(res);
-                            writer.flush();
-                            break;
-                        default:
-                            if (f.get(object) != null) {
-                                System.out.println("default" + f.getName());
-                                writer.write("<" + f.getName() + ">\n");
+                    if(f.get(object) != null) {
+                        switch (f.getType().toString()) {
+                            case "int":
+                                res = ("<" + f.getName() + ">");
+                                System.out.println("int" + res + f.get(object).toString());
+                                writer.write(res);
                                 writer.flush();
-                                packObject((Object) f.get(object), file);
-                                writer.write("</" + f.getName() + ">\n");
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
                                 writer.flush();
                                 break;
-                            }
+                            case "float":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "char":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n\r");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "double":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "boolean":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "byte":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "long":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            case "class java.lang.String":
+                                res = ("<" + f.getName() + ">");
+                                writer.write(res);
+                                writer.flush();
+                                writer.write(f.get(object).toString());
+                                writer.flush();
+                                res = ("</" + f.getName() + ">\n");
+                                writer.write(res);
+                                writer.flush();
+                                break;
+                            default:
+                                if (f.get(object) != null) {
+                                    System.out.println("default" + f.getName());
+                                    writer.write("<" + f.getName() + ">\n");
+                                    writer.flush();
+                                    packObject((Object) f.get(object), file);
+                                    writer.write("</" + f.getName() + ">\n");
+                                    writer.flush();
+                                    break;
+                                }
 
+                        }
                     }
                 }
                 writer.close();
