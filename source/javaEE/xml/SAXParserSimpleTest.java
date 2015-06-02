@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class SAXParserSimpleTest {
 
-    public static final String STRING = "E:\\Programming\\courses\\source\\temp\\file.xml";
+    public static final String STRING = "E:\\Programming\\courses\\source\\temp\\example.xml";
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
